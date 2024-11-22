@@ -1,0 +1,60 @@
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+mode: rule
+log-level: silent
+allow-lan: true
+external-controller: 0.0.0.0:9090
+bind-address: "*"
+ipv6: false
+dns:
+  enable: true
+  enhanced-mode: fake-ip
+  nameserver:
+    - 114.114.114.114
+    - 223.5.5.5
+    - 8.8.8.8
+  fallback: []
+  fake-ip-filter:
+    - +.stun.*.*
+    - +.stun.*.*.*
+    - +.stun.*.*.*.*
+    - +.stun.*.*.*.*.*
+    - "*.n.n.srv.nintendo.net"
+    - +.stun.playstation.net
+    - xbox.*.*.microsoft.com
+    - "*.*.xboxlive.com"
+    - "*.msftncsi.com"
+    - "*.msftconnecttest.com"
+    - WORKGROUP
+tun:
+  enable: true
+  stack: gvisor
+  auto-route: true
+  auto-detect-interface: true
+  dns-hijack: []
+experimental:
+  interface-name: en0
+proxies:
+  - name: VMESS 443
+    server: ilped.mro.my.id
+    port: 443
+    type: trojan
+    password: vvip-Icksansy123
+    skip-cert-verify: true
+    sni: mn2tr.jagoan.vip
+    network: ws
+    ws-opts:
+      path: /trojan
+      headers:
+        Host: mn2tr.jagoan.vip
+    udp: true
+
+proxy-groups:
+  - name: icksansy
+    type: select
+    proxies:
+      - VMESS 443
+rules:
+  - MATCH,icksansy
